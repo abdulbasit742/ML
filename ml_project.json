@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "ML Visual Site",
+    "status": "discovery",
+    "owner": "unassigned",
+    "purpose": "Document and review the uploaded ML visual-site archive before any model, dataset, or deployment is activated.",
+    "task_type": "unknown",
+    "intended_users": [],
+    "decision_impact": "unknown"
+  },
+  "data": {
+    "sources": [],
+    "provenance_status": "missing",
+    "license_status": "unknown",
+    "contains_personal_data": "unknown",
+    "contains_sensitive_data": "unknown",
+    "split_strategy": "unknown"
+  },
+  "model": {
+    "framework": "unknown",
+    "artifact_path": null,
+    "training_code_path": null,
+    "input_schema": [],
+    "output_schema": [],
+    "reproducible": false
+  },
+  "evaluation": {
+    "metrics": [],
+    "baseline": null,
+    "evaluation_dataset": null,
+    "subgroup_analysis": false
+  },
+  "deployment": {
+    "mode": "disabled",
+    "endpoint": null,
+    "human_review_required": true,
+    "rollback_plan": null
+  },
+  "limitations": [
+    "The legacy ZIP is opaque in the maintained source tree and has not been reviewed or activated."
+  ],
+  "risk": {
+    "level": "unknown",
+    "approved_uses": [],
+    "prohibited_uses": [
+      "clinical diagnosis",
+      "automated employment decisions",
+      "surveillance",
+      "biometric identification"
+    ],
+    "reviewer": "unassigned",
+    "reviewed_at": null
+  },
+  "legacy_archive": {
+    "path": "Kimi_Agent_ML Visual Site Build.zip",
+    "git_blob_sha": "1f61a8446ee478d4ee1331225b179035ccbc88e1",
+    "active": false
+  }
+}
