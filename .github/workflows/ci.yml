@@ -1,0 +1,31 @@
+name: Verify ML project governance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile source
+        run: python -m compileall -q scripts tests
+      - name: Run regression suite
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Validate project card
+        run: python scripts/ml_project.py validate
+      - name: Require honest discovery state
+        run: python scripts/ml_project.py readiness --expect blocked
+      - name: Verify repository and archive integrity
+        run: python scripts/repository_check.py
