@@ -2,42 +2,43 @@
 
 ## Scope
 
-These instructions apply to the entire `abdulbasit742/ML` repository. More specific AGENTS.md or AGENTS.override.md files in subdirectories may refine them.
+These instructions apply to the entire `abdulbasit742/ML` repository.
 
-Project: **ML**.
+Project: **ML Visual Site discovery baseline**. The only legacy product artifact is an opaque ZIP retained as inactive provenance.
 
-Detected root stack: **Documentation or source repository without a supported root package manifest**.
+## Source of truth
 
-## Working method
-
-1. Read README.md, the relevant manifests, and nearby tests before editing.
-2. Check the current diff and preserve unrelated user changes.
-3. Make the smallest coherent change that solves the task; follow existing names, patterns, and directory boundaries.
-4. Do not hand-edit generated, vendored, dependency, build-output, model-weight, or dataset files unless the task explicitly targets them.
-5. Update tests and documentation when behavior, configuration, public APIs, or setup steps change.
+- `ml_project.json` is the machine-readable project, data, model, evaluation, risk, and deployment contract.
+- `scripts/ml_project.py` owns validation and readiness semantics.
+- `Kimi_Agent_ML Visual Site Build.zip` is read-only legacy evidence with Git blob SHA `1f61a8446ee478d4ee1331225b179035ccbc88e1`.
+- Do not execute, edit in place, or mark the ZIP active.
 
 ## Commands
 
-- Read README.md and inspect nested directories for package.json, pyproject.toml, requirements.txt, Dockerfiles, Makefiles, or service-specific instructions.
-- Do not invent build, test, deployment, or migration commands. Record newly verified commands in README.md or a nested AGENTS.md.
+Use Python 3.11 or newer.
 
-## Verification
+```bash
+python -m compileall -q scripts tests
+python -m unittest discover -s tests -p 'test_*.py' -v
+python scripts/ml_project.py validate
+python scripts/ml_project.py readiness --expect blocked
+python scripts/repository_check.py
+```
 
-- Run the narrowest relevant test first, then the repository's available lint, type-check, test, and build commands.
-- Never report a check as passed unless it was actually run. State skipped checks and the concrete reason.
-- For UI changes, verify loading, empty, error, and success states plus keyboard access and responsive layout.
-- For API or persistence changes, verify validation, authorization, failure behavior, and backward compatibility.
+## Working rules
 
-## Security and side effects
-
-- Never commit secrets, tokens, passwords, private keys, production data, or populated environment files. Use documented environment variables and sanitized examples.
-- Treat migrations, deployments, billing, live network calls, account changes, destructive Git operations, and external messages as side effects. Do not perform them without explicit task authorization.
-- Validate untrusted input at trust boundaries and avoid logging credentials, personal data, prompts containing secrets, or raw third-party payloads.
-- Preserve existing architecture and external API contracts. Add dependencies or infrastructure only when the requested change clearly requires them.
+1. Preserve unknown values until supported by inspected source, data documentation, licenses, and evaluation evidence.
+2. Keep deployment disabled until the project card is ready and an accountable risk reviewer is recorded.
+3. Never commit real personal/sensitive datasets, secrets, populated environment files, or unreviewed serialized models.
+4. Treat pickle/joblib/framework checkpoints and notebook outputs as untrusted executable or data artifacts.
+5. Migrate archive contents only on a dedicated reviewed branch into normal text source with a lockfile and tests.
+6. Do not present metrics, accuracy, fairness, safety, clinical, financial, employment, biometric, or production claims without cited evaluation evidence in the card.
+7. Update tests, README, reference review, and security audit when the contract changes.
 
 ## Completion checklist
 
-- The requested behavior is implemented with a focused diff.
-- Relevant automated checks pass, or any unavailable checks are clearly identified.
-- No secrets, generated artifacts, or unrelated formatting churn were introduced.
-- The final handoff summarizes changed files, verification evidence, risks, and any follow-up work.
+- Structural validation and tests pass.
+- Repository check confirms the pinned archive is unchanged.
+- Readiness result matches the evidence; do not weaken it for convenience.
+- New data/model artifacts have provenance, license, privacy classification, and review.
+- No deployment or external side effect occurs without explicit authorization.
